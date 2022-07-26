@@ -6,19 +6,46 @@ import Weather from "./components/Weather";
 const API_KEY = "c16af6a98f7ab67716a51f37d2a3ebe4";
 
 function App() {
- const gettingWeather = async () => {
+  const state = {
+    temp: undefined,
+    city: undefined,
+    country: undefined,
+    sunrise: undefined,
+    sunset: undefined,
+    error: undefined,
+  };
+
+  const gettingWeather = async (e) => {
+    e.preventDefault();
+    const city = e.target.elements.city.value;
     const api_url = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${API_KEY}`
+      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`
     );
     const data = await api_url.json();
     console.log(data);
+
+    this.setState({
+      temp: data.main.temp,
+      city: data.name,
+      country: data.sys.country,
+      sunrise: data.sys.sunrise,
+      sunset: data.sys.sunrise,
+      error: ''
+    });
   };
 
   return (
     <div className="App">
       <Info />
-      <Form weatherMethod = {this.gettingWeather}/>
-      <Weather />
+      <Form weatherMethod={gettingWeather} />
+      <Weather 
+        temp={state.temp}
+        city={state.city}
+        country={state.country}
+        sunrise={state.sunrise}
+        sunset={state.sunset}
+        error={state.error}
+      />
     </div>
   );
 }

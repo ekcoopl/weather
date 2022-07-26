@@ -3,7 +3,7 @@ import React from 'react';
 const Weather = () => {
     return (
         <div>
-            Компонент с погодной информацией
+            {this.props.city}
         </div>
     );
 }
