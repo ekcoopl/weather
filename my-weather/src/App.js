@@ -6,8 +6,9 @@ import Weather from "./components/Weather";
 const API_KEY = "c16af6a98f7ab67716a51f37d2a3ebe4";
 
 function App() {
+  
   const state = {
-    temp: undefined,
+    temp: 'undefined',
     city: undefined,
     country: undefined,
     sunrise: undefined,
@@ -19,7 +20,7 @@ function App() {
     e.preventDefault();
     const city = e.target.elements.city.value;
     const api_url = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
     );
     const data = await api_url.json();
     console.log(data);
@@ -30,7 +31,7 @@ function App() {
       country: data.sys.country,
       sunrise: data.sys.sunrise,
       sunset: data.sys.sunrise,
-      error: ''
+      error: "",
     });
   };
 
@@ -38,7 +39,7 @@ function App() {
     <div className="App">
       <Info />
       <Form weatherMethod={gettingWeather} />
-      <Weather 
+      <Weather
         temp={state.temp}
         city={state.city}
         country={state.country}

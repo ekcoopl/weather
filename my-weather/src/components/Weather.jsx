@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const Weather = () => {
-    return (
-        <div>
-            {this.props.city}
-        </div>
-    );
-}
+const Weather = (props) => {
+  return (
+    <div>
+      {props.temp}
+  
+    </div>
+  );
+};
 
 export default Weather;
